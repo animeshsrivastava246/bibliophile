@@ -1,12 +1,12 @@
-const Book = require("../models/Book");
-const User = require("../models/User");
+import Book from "../models/Book.js";
+import User from "../models/User.js";
 
 const resolvers = {
 	Query: {
-		books: async () => await Book.find(),
-		book: async (_, { id }) => await Book.findById(id),
-		users: async () => await User.find(),
-		user: async (_, { id }) => await User.findById(id),
+		books: async () => await find(),
+		book: async (_, { id }) => await findById(id),
+		users: async () => await _find(),
+		user: async (_, { id }) => await _findById(id),
 	},
 	Mutation: {
 		addBook: async (
@@ -30,4 +30,4 @@ const resolvers = {
 	},
 };
 
-module.exports = resolvers;
+export default resolvers;

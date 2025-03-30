@@ -1,25 +1,25 @@
-const express = require("express");
-const { ApolloServer } = require("@apollo/server");
-const { expressMiddleware } = require("@apollo/server/express4");
-const cors = require("cors");
-const mongoose = require("mongoose");
+import express, { json } from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import cors from "cors";
+import { connect } from "mongoose";
 
-require("dotenv").config();
+import typeDefs from "./graphql/schema.js";
+import resolvers from "./graphql/resolvers.js";
 
-const typeDefs = require("./graphql/schema");
-const resolvers = require("./graphql/resolvers");
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 async function startServer() {
 	const server = new ApolloServer({ typeDefs, resolvers });
 	await server.start();
 	app.use("/graphql", expressMiddleware(server));
 
-	mongoose
-		.connect(process.env.MONGO_URI, { dbName: "bibliophile" })
+	connect(process.env.MONGO_URI, { dbName: "bibliophile" })
 		.then(() => {
 			console.log("✅ MongoDB Connected");
 			app.listen(5000, () =>
