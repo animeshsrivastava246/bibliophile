@@ -3,10 +3,10 @@ import User from "../models/User.js";
 
 const resolvers = {
 	Query: {
-		books: async () => await find(),
-		book: async (_, { id }) => await findById(id),
-		users: async () => await _find(),
-		user: async (_, { id }) => await _findById(id),
+		books: async () => await Book.find(), // ✅ Fixed
+		book: async (_, { id }) => await Book.findById(id), // ✅ Fixed
+		users: async () => await User.find(), // ✅ Fixed
+		user: async (_, { id }) => await User.findById(id), // ✅ Fixed
 	},
 	Mutation: {
 		addBook: async (
