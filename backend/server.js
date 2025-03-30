@@ -1,9 +1,10 @@
-require("dotenv").config();
 const express = require("express");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
-const mongoose = require("mongoose");
 const cors = require("cors");
+const mongoose = require("mongoose");
+
+require("dotenv").config();
 
 const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
@@ -18,13 +19,14 @@ async function startServer() {
 	app.use("/graphql", expressMiddleware(server));
 
 	mongoose
-		.connect(process.env.MONGO_URI)
-		.then(() => console.log("✅ MongoDB Connected"))
-		.catch((err) => console.error("❌ MongoDB Connection Error:", err));
-
-	app.listen(5000, () =>
-		console.log("🚀 Server running at http://localhost:5000/graphql")
-	);
+		.connect(process.env.MONGO_URI, { dbName: "bibliophile" })
+		.then(() => {
+			console.log("✅ MongoDB Connected");
+			app.listen(5000, () =>
+				console.log("🚀 Server running at http://localhost:5000/graphql")
+			);
+		})
+		.catch((err) => console.error(err));
 }
 
 startServer();
