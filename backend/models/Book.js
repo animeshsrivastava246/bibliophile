@@ -6,7 +6,7 @@ const bookSchema = new Schema({
 	genre: { type: String, required: true },
 	language: { type: String, required: true },
 	rating: { type: Number, default: 0 },
-	description: { type: String },
+	description: { type: String, required: true },
 	buyLink: { type: String },
 });
 

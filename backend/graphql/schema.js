@@ -8,7 +8,7 @@ const typeDefs = gql`
 		genre: String!
 		language: String!
 		rating: Float
-		description: String
+		description: String!
 		buyLink: String
 	}
 
@@ -32,7 +32,7 @@ const typeDefs = gql`
 			author: String!
 			genre: String!
 			language: String!
-			description: String
+			description: String!
 			buyLink: String
 		): Book
 		addUser(username: String!, email: String!): User
