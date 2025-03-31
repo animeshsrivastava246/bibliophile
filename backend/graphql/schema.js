@@ -1,4 +1,5 @@
-import { gql } from "graphql-tag";
+import pkg from '@apollo/client';
+const { gql } = pkg;
 
 const typeDefs = gql`
 	type Book {
