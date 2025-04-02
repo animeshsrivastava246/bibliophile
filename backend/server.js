@@ -21,7 +21,6 @@ async function startServer() {
 
 	connect(process.env.MONGO_URI, { dbName: "bibliophile" })
 		.then(() => {
-			console.log("✅ MongoDB Connected");
 			app.listen(5000, () =>
 				console.log("🚀 Server running at http://localhost:5000/graphql")
 			);
