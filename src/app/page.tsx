@@ -1,53 +1,58 @@
 // src/app/(main)/page.tsx
 
-import { Suspense } from "react"
-import { Metadata } from "next"
-import { getRecommendedBooks } from "@/lib/mock" // Replace with actual hook/api later
-import { BookGridSkeleton } from "@/components/common/LoadingSkeletons"
-import { BookRecommendations } from "@/components/features/book/BookRecommendations"
-import { MainHeader } from "@/components/layout/MainHeader"
+import { Suspense } from "react";
+// import { BookCard } from "@/components/features/book/BookCard";
+import { BookGridSkeleton } from "@/components/common/LoadingSkeletons";
+import { MainHeader } from "@/components/layout/MainHeader";
+// import { useAuth } from "@/hooks/useAuth";
+// import { useBookData } from "@/hooks/useBookData";
+import { Book } from "@/types/book";
+import { BookRecommendations } from "@/components/features/book/BookRecommendations";
 
-// Dynamic metadata
-export const metadata: Metadata = {
-  title: "Bibliophile — Discover, Discuss, and Dive into Books",
-  description:
-    "AI-powered book recommendations tailored to your taste. Explore adaptations, join discussions, and track your literary journey.",
-  openGraph: {
-    title: "Bibliophile",
-    description: "Your personalized AI-powered reading hub.",
-    url: "https://yourdomain.com",
-    siteName: "Bibliophile",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Bibliophile Open Graph Image",
-      },
-    ],
-    type: "website",
-  },
-}
-
-// Home page
 export default function HomePage() {
-  return (
-    <main className="min-h-screen bg-background text-foreground">
-      <MainHeader />
+	// const { user } = useAuth();
+	// const { books, isLoading, fetchBooks } = useBookData(user);
 
-      <section className="container py-10 space-y-8">
-        <h1 className="text-4xl font-bold tracking-tight text-center">
-          📚 Welcome to Bibliophile
-        </h1>
-        <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto">
-          AI-powered book recommendations, community-driven reviews, and media adaptation connections — all in one place.
-        </p>
+	// useEffect(() => {
+	// 	fetchBooks(); // Load books on mount
+	// }, [fetchBooks]);
 
-        {/* Book Recommendations Section */}
-        <Suspense fallback={<BookGridSkeleton count={6} />}>
-          <BookRecommendations />
-        </Suspense>
-      </section>
-    </main>
-  )
+	return (
+		<>
+			<MainHeader />
+			<main className="max-w-7xl mx-auto px-4 py-10">
+				{/* <section className="mb-8 text-center">
+					<h1 className="text-4xl font-bold tracking-tight">
+						{user
+							? `Welcome back, ${user.displayName || "Reader"}!`
+							: "Discover Your Next Favorite Book"}
+					</h1>
+					<p className="mt-2 text-lg text-muted-foreground">
+						{user
+							? "Here are your personalized AI-powered recommendations:"
+							: "Explore books curated with the power of AI and community wisdom."}
+					</p>
+				</section> */}
+
+				{/* <section aria-label="Recommended Books">
+					{isLoading ? (
+						<BookGridSkeleton />
+					) : (
+						<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+							{books.map((book: Book) => (
+								<BookCard key={book._id} book={book} />
+							))}
+						</div>
+					)}
+				</section> */}
+				<section aria-label="Recommended Books">
+					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						<Suspense fallback={<BookGridSkeleton />}>
+							<BookRecommendations />
+						</Suspense>
+					</div>
+				</section>
+			</main>
+		</>
+	);
 }

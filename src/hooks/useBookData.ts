@@ -1,20 +1,27 @@
-import { useEffect, useState } from "react"
-import { Book } from "@/types/book"
-import { getRecommendedBooks } from "@/lib/mock"
-import { User } from "firebase/auth"
+// // src/hooks/useBookData.ts
 
-export function useBookData(user: User | null) {
-    const [books, setBooks] = useState<Book[]>([])
-    const [loading, setLoading] = useState(true)
+// "use client";
 
-    useEffect(() => {
-        async function fetchBooks() {
-            const data = await getRecommendedBooks(user)
-            setBooks(data)
-            setLoading(false)
-        }
-        fetchBooks()
-    }, [user])
+// import { useState, useCallback } from "react";
+// import { Book } from "@/types/book";
+// import { getRecommendedBooks } from "@/lib/mock";
 
-    return { books, loading }
-}
+// export const useBookData = (user?: { uid: string }) => {
+//     const [books, setBooks] = useState<Book[]>([]);
+//     const [isLoading, setIsLoading] = useState<boolean>(false);
+
+//     const fetchBooks = useCallback(async () => {
+//         setIsLoading(true);
+//         try {
+//             const recommended = await getRecommendedBooks(user?.uid ?? "");
+
+//             setBooks(recommended);
+//         } catch (err) {
+//             console.error("Failed to fetch books:", err);
+//         } finally {
+//             setIsLoading(false);
+//         }
+//     }, [user]);
+
+//     return { books, isLoading, fetchBooks };
+// };
