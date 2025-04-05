@@ -147,7 +147,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ├── .gitignore # Git ignore config
 ├── next.config.mjs # Next.js config
 ├── package.json # Dependencies & Scripts
-├── postcss.config.js # PostCSS config (for Tailwind)
-├── tailwind.config.ts # Tailwind CSS config
+├── postcss.config.mjs # PostCSS config (for Tailwind)
 └── tsconfig.json # TypeScript config
 ```
