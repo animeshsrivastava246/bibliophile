@@ -37,6 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Folder Structure
 
+```
 .
 ├── public/ # Static assets (images, fonts, etc.)
 │ └── ...
@@ -149,3 +150,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ├── postcss.config.js # PostCSS config (for Tailwind)
 ├── tailwind.config.ts # Tailwind CSS config
 └── tsconfig.json # TypeScript config
+```
